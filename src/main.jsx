@@ -12,6 +12,10 @@ import Register from './pages/Register/Register.jsx'
 import Issues from './pages/Issues/Issues.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import IssueDetails from './pages/IssueDetails/IssueDetails.jsx'
+import AllIssues from './pages/AllIssues/AllIssues.jsx'
+import AddIssue from './pages/AddIssue/AddIssue.jsx'
+import MyIssues from './pages/MyIssues/MyIssues.jsx'
+import MyContribution from './pages/MyContribution/MyContribution.jsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +41,22 @@ const router = createBrowserRouter([
       {
         path: "/issues/:id",
         element: <PrivateRoute><IssueDetails></IssueDetails></PrivateRoute>
+      },
+      {
+        path: "all-issues",
+        element: <PrivateRoute><AllIssues></AllIssues></PrivateRoute>
+      },
+      {
+        path: "add-issue",
+        element: <PrivateRoute><AddIssue></AddIssue></PrivateRoute>
+      },
+      {
+        path: "my-issues",
+        element: <PrivateRoute><MyIssues></MyIssues></PrivateRoute>
+      },
+      {
+        path: "my-contribution",
+        element: <PrivateRoute><MyContribution></MyContribution></PrivateRoute>
       }
     ]
   }
