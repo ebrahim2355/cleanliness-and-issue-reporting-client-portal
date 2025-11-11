@@ -3,7 +3,7 @@
 A full-stack MERN (MongoDB, Express.js, React.js, Node.js) web application that allows users to report, track, and resolve cleanliness and public issues in their local community. Users can also join cleanup drives, contribute funds for community services, and view their issue history.
 
 ## 🌟 Live Site
-[Live Demo](https://your-live-site-link.com)
+[Live Demo](https://cleanliness-and-issue.web.app/)
 
 ## 🛠️ Key Features
 
@@ -29,19 +29,21 @@ A full-stack MERN (MongoDB, Express.js, React.js, Node.js) web application that 
 - **PDF Reports**: jsPDF + jsPDF-AutoTable
 
 
-🔗 Useful Links
-Client Repository
+## 🔗 Useful Links
 
-Server Repository
+[Client Repository](https://github.com/ebrahim2355/cleanliness-and-issue-reporting-client-portal)
 
-Live Demo
+[Server Repository](https://github.com/ebrahim2355/cleanliness-and-issue-reporting-server-portal)
 
-📧 Contact
-Name: MD. Ebrahim Ali
+[Live Demo](https://cleanliness-and-issue.web.app/)
 
-Email: md.ebrahim.ali@example.com
+## 📧 Contact
+- **Name:** MD. Ebrahim Ali
 
-GitHub: https://github.com/ebrahim2355
+- **Email:** web.ebrahimali@gmail.com
 
-📄 License
+- **GitHub:** https://github.com/ebrahim2355
+
+
+## 📄 License
 This project is licensed under the MIT License.
