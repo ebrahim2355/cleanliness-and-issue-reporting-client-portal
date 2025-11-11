@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function MyContribution() {
     const { user } = useAuth();
@@ -17,7 +19,6 @@ export default function MyContribution() {
             const res = await axiosSecure.get(`/contributions?email=${user.email}`);
             const baseContributions = res.data || [];
 
-            // For each contribution, fetch issue details by issueId
             const enriched = await Promise.all(
                 baseContributions.map(async (c) => {
                     try {
@@ -26,10 +27,11 @@ export default function MyContribution() {
                         return {
                             ...c,
                             issueTitle: issue?.title || "N/A",
+                            category: issue?.category || "N/A",
                             status: issue?.status || "N/A",
                         };
                     } catch {
-                        return { ...c, issueTitle: "N/A", status: "N/A" };
+                        return { ...c, issueTitle: "N/A", category: "N/A", status: "N/A" };
                     }
                 })
             );
@@ -45,6 +47,31 @@ export default function MyContribution() {
     useEffect(() => {
         if (user?.email) fetchContributions();
     }, [user?.email]);
+
+    // --- PDF Generation Function ---
+    const handleDownload = (contribution) => {
+        const doc = new jsPDF();
+        doc.setFontSize(18);
+        doc.text("Contribution Report", 14, 22);
+
+        const data = [
+            ["Issue Title", contribution.issueTitle],
+            ["Category", contribution.category],
+            ["Amount Paid", `$${contribution.amount}`],
+            ["Date", new Date(contribution.date).toLocaleDateString()],
+            ["Status", contribution.status],
+        ];
+
+        autoTable(doc, {
+            startY: 30,
+            body: data,
+            theme: "grid",
+            styles: { cellPadding: 3, fontSize: 12 },
+            tableLineWidth: 0.5,
+        });
+
+        doc.save(`Contribution_${contribution._id}.pdf`);
+    };
 
     if (loading) {
         return (
@@ -72,15 +99,18 @@ export default function MyContribution() {
                             <thead className="bg-green-50">
                                 <tr>
                                     <th className="border p-2 text-left">Issue Title</th>
+                                    <th className="border p-2 text-left">Category</th>
                                     <th className="border p-2 text-left">Amount</th>
                                     <th className="border p-2 text-left">Date</th>
                                     <th className="border p-2 text-left">Status</th>
+                                    <th className="border p-2 text-left">Download PDF</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {contributions.map((c) => (
                                     <tr key={c._id} className="hover:bg-gray-50">
                                         <td className="border p-2">{c.issueTitle}</td>
+                                        <td className="border p-2">{c.category}</td>
                                         <td className="border p-2 text-green-700 font-semibold">
                                             ${c.amount}
                                         </td>
@@ -90,14 +120,22 @@ export default function MyContribution() {
                                         <td className="border p-2">
                                             <span
                                                 className={`px-2 py-1 rounded-full text-xs md:text-sm ${c.status === "ended"
-                                                    ? "bg-red-100 text-red-700"
-                                                    : c.status === "ongoing"
-                                                        ? "bg-yellow-100 text-yellow-700"
-                                                        : "bg-gray-100 text-gray-600"
+                                                        ? "bg-red-100 text-red-700"
+                                                        : c.status === "ongoing"
+                                                            ? "bg-yellow-100 text-yellow-700"
+                                                            : "bg-gray-100 text-gray-600"
                                                     }`}
                                             >
                                                 {c.status}
                                             </span>
+                                        </td>
+                                        <td className="border p-2">
+                                            <button
+                                                onClick={() => handleDownload(c)}
+                                                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer"
+                                            >
+                                                Download PDF
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -115,40 +153,49 @@ export default function MyContribution() {
                                 <table className="w-full text-sm">
                                     <tbody>
                                         <tr>
-                                            <td className="font-medium text-gray-600 py-1">
-                                                Issue Title
-                                            </td>
+                                            <td className="font-medium text-gray-600 py-1">Issue Title</td>
                                             <td className="text-right text-green-700 font-semibold py-1">
                                                 {c.issueTitle}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="font-medium text-gray-600 py-1">
-                                                Amount
-                                            </td>
+                                            <td className="font-medium text-gray-600 py-1">Category</td>
+                                            <td className="text-right py-1">{c.category}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-medium text-gray-600 py-1">Amount</td>
                                             <td className="text-right text-green-700 font-semibold py-1">
                                                 ${c.amount}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="font-medium text-gray-600 py-1">Date</td>
-                                            <td className="text-right py-1">
-                                                {new Date(c.date).toLocaleDateString()}
-                                            </td>
+                                            <td className="text-right py-1">{new Date(c.date).toLocaleDateString()}</td>
                                         </tr>
                                         <tr>
                                             <td className="font-medium text-gray-600 py-1">Status</td>
                                             <td className="text-right py-1">
                                                 <span
                                                     className={`px-2 py-1 rounded-full text-xs ${c.status === "ended"
-                                                        ? "bg-red-100 text-red-700"
-                                                        : c.status === "ongoing"
-                                                            ? "bg-yellow-100 text-yellow-700"
-                                                            : "bg-gray-100 text-gray-600"
+                                                            ? "bg-red-100 text-red-700"
+                                                            : c.status === "ongoing"
+                                                                ? "bg-yellow-100 text-yellow-700"
+                                                                : "bg-gray-100 text-gray-600"
                                                         }`}
                                                 >
                                                     {c.status}
                                                 </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-medium text-gray-600 py-1">Actions</td>
+                                            <td className="text-right py-1">
+                                                <button
+                                                    onClick={() => handleDownload(c)}
+                                                    className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs cursor-pointer"
+                                                >
+                                                    Download PDF
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>

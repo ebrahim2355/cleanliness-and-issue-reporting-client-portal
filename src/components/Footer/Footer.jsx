@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaFacebook, FaXTwitter, FaInstagram, FaGithub, FaEnvelope } from "react-icons/fa6";
 
 export default function Footer() {
     return (
@@ -27,13 +27,50 @@ export default function Footer() {
                     </ul>
                 </div>
 
-                {/* Social */}
+                {/* Contact & Social */}
                 <div>
-                    <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
+                    <h3 className="text-lg font-semibold mb-3">Contact Me</h3>
+                    <ul className="space-y-2 text-sm mb-3">
+                        <li>Name: MD. Ebrahim Ali</li>
+                        <li>
+                            GitHub:{" "}
+                            <a
+                                href="https://github.com/ebrahim2355"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-green-700"
+                            >
+                                github.com/ebrahim2355
+                            </a>
+                        </li>
+                        <li>
+                            Email:{" "}
+                            <a
+                                href="mailto:web.ebrahimali@gmail.com"
+                                className="hover:text-green-700"
+                            >
+                                web.ebrahimali@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                    <h3 className="text-lg font-semibold mb-2">Follow Me</h3>
                     <div className="flex gap-4 text-xl">
-                        <a href="#" className="hover:text-green-700"><FaFacebook /></a>
-                        <a href="#" className="hover:text-green-700"><FaXTwitter /></a>
+                        <a target="_blank"
+                                rel="noopener noreferrer" href="https://www.facebook.com/ebrahim2355" className="hover:text-green-700"><FaFacebook /></a>
+                        <a target="_blank"
+                                rel="noopener noreferrer" href="https://www.x.com/ebrahim2355" className="hover:text-green-700"><FaXTwitter /></a>
                         <a href="#" className="hover:text-green-700"><FaInstagram /></a>
+                        <a
+                            href="https://github.com/ebrahim2355"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-green-700"
+                        >
+                            <FaGithub />
+                        </a>
+                        <a href="mailto:web.ebrahimali@gmail.com" className="hover:text-green-700">
+                            <FaEnvelope />
+                        </a>
                     </div>
                 </div>
             </div>

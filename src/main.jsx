@@ -16,6 +16,8 @@ import AllIssues from './pages/AllIssues/AllIssues.jsx'
 import AddIssue from './pages/AddIssue/AddIssue.jsx'
 import MyIssues from './pages/MyIssues/MyIssues.jsx'
 import MyContribution from './pages/MyContribution/MyContribution.jsx'
+import JoinDrive from './pages/JoinDrive/JoinDrive.jsx'
+import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: "my-contribution",
         element: <PrivateRoute><MyContribution></MyContribution></PrivateRoute>
+      },
+      {
+        path: "join-drive",
+        element: <PrivateRoute><JoinDrive></JoinDrive></PrivateRoute>
+      },
+      {
+        path: "*",
+        Component: ErrorPage
       }
     ]
   }

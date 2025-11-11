@@ -78,7 +78,7 @@ export default function Navbar() {
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setShowLogout(!showLogout)}
-                                className="flex items-center gap-2 text-gray-700 hover:text-green-700 transition"
+                                className="flex items-center gap-2 text-gray-700 hover:text-green-700 transition cursor-pointer"
                             >
                                 {user.photoURL ? (
                                     <img

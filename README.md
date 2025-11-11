@@ -1,16 +1,47 @@
-# React + Vite
+# CleanCommunity - Community Cleanliness & Issue Reporting Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN (MongoDB, Express.js, React.js, Node.js) web application that allows users to report, track, and resolve cleanliness and public issues in their local community. Users can also join cleanup drives, contribute funds for community services, and view their issue history.
 
-Currently, two official plugins are available:
+## 🌟 Live Site
+[Live Demo](https://your-live-site-link.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Key Features
 
-## React Compiler
+- **Public Home Page** with banner slider, issue categories, and recent complaints.
+- **User Authentication**: Register/Login with email-password and Google login.
+- **Add Issue**: Logged-in users can report new issues with images, descriptions, and suggested fix budgets.
+- **All Issues Page**: Browse all reported issues with category and status filters.
+- **Issue Details**: View detailed information about each complaint and contribute to cleanup efforts.
+- **My Issues & Contributions**: Users can view, update, or delete their own issues and see their contribution history.
+- **Community Stats**: Total users, resolved issues, pending issues.
+- **Volunteer Section**: Join local cleanup drives.
+- **Responsive UI** using Tailwind CSS.
+- **Secure Routes**: Private routes with Firebase Authentication.
+- **Dark/Light Mode Toggle** and interactive UI animations.
+- **Download Reports**: Export contribution receipts as PDF.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 Technology Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React.js, React Router, Tailwind CSS, React Slick (Slider), React Hot Toast
+- **Backend**: Node.js, Express.js, MongoDB, Mongoose
+- **Authentication**: Firebase Authentication
+- **Deployment**: Netlify (frontend), Vercel (backend)
+- **PDF Reports**: jsPDF + jsPDF-AutoTable
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+🔗 Useful Links
+Client Repository
+
+Server Repository
+
+Live Demo
+
+📧 Contact
+Name: MD. Ebrahim Ali
+
+Email: md.ebrahim.ali@example.com
+
+GitHub: https://github.com/ebrahim2355
+
+📄 License
+This project is licensed under the MIT License.
